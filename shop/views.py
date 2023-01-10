@@ -10,7 +10,6 @@ from rest_framework import views
 from rest_framework import authentication, permissions
 from .permissions import IsProfilePermission
 
-
 from .models import Category, Item, Order
 from .serializers import CategorySerializer, ItemSerializer, OrderSerializer
 
@@ -19,4 +18,12 @@ class CategoryCreateListView(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user.author)
+        serializer.save(profile=self.request.user.profile)
+
+class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    authentication_classes = [authentication.BasicAuthentication, authentication.TokenAuthentication]
+
+    def perform_update(self, serializer):
+        serializer.save(profile=self.request.user.profile)

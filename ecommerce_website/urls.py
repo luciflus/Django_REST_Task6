@@ -18,11 +18,14 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework.authtoken import views as auth_views
 
-from account import views
+from account import views as acc_view
+from shop import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/account/register/sender/',  views.ProfileCreateListView.as_view()),
-    path('api/account/register/buyer/',  views.ProfileCreateListView.as_view()),
+    path('api/account/register/sender/', acc_view.ProfileCreateListView.as_view()),
+    path('api/account/register/buyer/', acc_view.ProfileCreateListView.as_view()),
+    path('api/shop/category/', views.CategoryCreateListView.as_view()),
+    path('api/shop/category/<int:pk>/', views.CategoryRetrieveUpdateDestroyAPIView.as_view()),
     path('api/token/', auth_views.obtain_auth_token),
 ]

@@ -1,22 +1,22 @@
 from rest_framework import serializers
 
-from .models import Category, Item, Order
+from .models import Category, Item, Order, Profile
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = "__all__"
-        # exclude = ['author', ]
-        read_only_fields = ['author', ]
+        # exclude = ['profile', ]
+        #read_only_fields = ['profile', ]
 
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = "__all__"
-        read_only_fields = ['author', ]
+        #read_only_fields = ['profile', ]
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = "__all__"
-        read_only_fields = ['author', ]
+        #read_only_fields = ['profile', ]
